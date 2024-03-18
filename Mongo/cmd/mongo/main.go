@@ -3,11 +3,16 @@ package main
 import (
 	"Mongo/internal/database"
 	"fmt"
+	"os"
 )
 
-var MongoUri = "mongodb+srv://nathan:AiV!M8aTrRqUEggQD_Hp@appstockdb.bxp0vgt.mongodb.net/?retryWrites=true&w=majority&appName=AppStockDB"
+var MongoUri = os.Getenv("MONGO_URI")
 
-func main() {
+func main(){
+	if MongoUri==""{
+		fmt.Println("MONGO_URI env var is not set")
+		return
+	}
 	err := database.Init(MongoUri, "developement")
 	if err != nil {
 		fmt.Println(err)
