@@ -16,7 +16,31 @@ func AddProductRoutes(r *gin.Engine) {
 
 func AddClientsRoutes(r *gin.Engine) {
 	r.GET("/clients", handler.GetClients)
+	r.GET("/clients/:id", handler.GetClientById)
 	r.POST("/clients", handler.CreateClient)
 	r.PATCH("/clients/:id", handler.EditClientInfos)
 	r.DELETE("/clients/:id", handler.DeleteClientById)
+}
+
+func AddCommandsRoutes(r *gin.Engine) {
+	r.GET("/commands", handler.GetCommands)
+	r.GET("/commands/:id", handler.GetCommandById)
+	r.POST("/commands", handler.CreateCommand)
+	r.DELETE("/commands/:id", handler.DeleteCommandById)
+}
+
+func AddDocumentsRoutes(r *gin.Engine) {
+	r.GET("/documents", handler.GetDocuments)
+	r.GET("/documents/:id", handler.GetDocumentById)
+	r.POST("/documents", handler.CreateDocument)
+	r.DELETE("/documents/:id", handler.DeleteDocumentById)
+}
+
+func DefineRouter() *gin.Engine {
+	r := gin.Default()
+	AddProductRoutes(r)
+	AddClientsRoutes(r)
+	AddCommandsRoutes(r)
+	AddDocumentsRoutes(r)
+	return r
 }

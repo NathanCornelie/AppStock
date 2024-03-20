@@ -10,7 +10,7 @@ type Client struct {
 }
 
 type CreateClientRequest struct {
-	Firstname string `bson:"name" json:"name"`
+	Firstname string `bson:"name" json:"firstname"`
 	Lastname  string `bson:"lastname" json:"lastname"`
 	Email     string `bson:"email" json:"email"`
 }

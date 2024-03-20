@@ -8,9 +8,11 @@ import (
 )
 
 var (
-	client   *mongo.Client
-	Products *mongo.Collection
-	Clients  *mongo.Collection
+	client    *mongo.Client
+	Products  *mongo.Collection
+	Clients   *mongo.Collection
+	Commands  *mongo.Collection
+	Documents *mongo.Collection
 )
 
 func Init(uri string, database string) error {
@@ -25,6 +27,8 @@ func Init(uri string, database string) error {
 
 	Products = client.Database(database).Collection("products")
 	Clients = client.Database(database).Collection("clients")
+	Commands = client.Database(database).Collection("commands")
+	Documents = client.Database(database).Collection("documents")
 
 	err = client.Database("admin").RunCommand(context.TODO(), bson.D{{"ping", 1}}).Err()
 	return err

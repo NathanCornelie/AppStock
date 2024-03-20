@@ -15,6 +15,7 @@ func GetProducts(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to fetch products"})
 		return
 	}
+
 	var products []model.Product
 	err = cursor.All(c, &products)
 	if err != nil {

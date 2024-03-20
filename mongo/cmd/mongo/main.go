@@ -4,8 +4,9 @@ import (
 	"Mongo/internal"
 	"Mongo/internal/database"
 	"fmt"
-	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"os"
+	"time"
 )
 
 var MongoUri = os.Getenv("MONGO_URI")
@@ -15,6 +16,7 @@ func main() {
 		fmt.Println("MONGO_URI env var is not set")
 		return
 	}
+	fmt.Println(primitive.NewDateTimeFromTime(time.Now()))
 	err := database.Init(MongoUri, "developement")
 	if err != nil {
 		fmt.Println(err)
@@ -28,9 +30,11 @@ func main() {
 		}
 	}()
 
-	r := gin.Default()
-	internal.AddProductRoutes(r)
-	internal.AddClientsRoutes(r)
-	r.Run(":8080")
+	r := internal.DefineRouter()
+
+	err = r.Run(":8080")
+	if err != nil {
+		return
+	}
 
 }
