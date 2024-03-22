@@ -115,7 +115,7 @@ dist
 
 # DynamoDB Local files
 .dynamodb/
-
+mongo
 # TernJS port file
 .tern-port
 
@@ -130,3 +130,4 @@ dist
 .pnp.*
 ## IDE
 .idea
+Mongo/.idea
