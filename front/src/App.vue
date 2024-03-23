@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar.vue";
 </script>
 
 <template>
-  <v-app>
+  <v-app class="bg-grey-lighten-4">
     <NavBar />
     <div class="content">
 

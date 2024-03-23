@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"net/http"
 	"time"
 )
@@ -41,6 +42,22 @@ func GetDocumentById(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, document)
+}
+func GetDocumentByUserId(c *gin.Context) {
+	userId := c.Param("userId")
+	_id, err := primitive.ObjectIDFromHex(userId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user id provided"})
+		return
+	}
+	result, err := database.Documents.Find(c, bson.M{"userId": _id}, options.Find().SetProjection(bson.M{"_id": 1, "userId": 1}))
+	var documents []model.Documents
+	err = result.All(c, &documents)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to find document for this user"})
+		return
+	}
+	c.JSON(http.StatusOK, documents)
 }
 
 func CreateDocument(c *gin.Context) {

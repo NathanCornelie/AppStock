@@ -16,7 +16,6 @@ const vuetify = createVuetify({
 const routes = [
     {
         path: '/',
-        name : "Home",
         component : Home
     }
 ]

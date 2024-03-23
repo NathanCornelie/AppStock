@@ -32,6 +32,7 @@ func AddCommandsRoutes(r *gin.Engine) {
 func AddDocumentsRoutes(r *gin.Engine) {
 	r.GET("/documents", handler.GetDocuments)
 	r.GET("/documents/:id", handler.GetDocumentById)
+	r.GET("/documents/users/:userId", handler.GetDocumentByUserId)
 	r.POST("/documents", handler.CreateDocument)
 	r.DELETE("/documents/:id", handler.DeleteDocumentById)
 }

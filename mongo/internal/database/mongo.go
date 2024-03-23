@@ -24,7 +24,6 @@ func Init(uri string, database string) error {
 		return err
 	}
 	client = localClient
-
 	Products = client.Database(database).Collection("products")
 	Clients = client.Database(database).Collection("clients")
 	Commands = client.Database(database).Collection("commands")
