@@ -51,11 +51,20 @@ func GetDocumentByUserId(c *gin.Context) {
 		return
 	}
 	result, err := database.Documents.Find(c, bson.M{"userId": _id}, options.Find().SetProjection(bson.M{"_id": 1, "userId": 1}))
-	var documents []model.Documents
+	var documents []model.DocumentWithCommands
 	err = result.All(c, &documents)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to find document for this user"})
 		return
+	}
+	for i := 0; i < len(documents); i++ {
+		result, err = database.Commands.Find(c, bson.M{"documentId": documents[i].ID})
+		if err == nil {
+			err := result.All(c, &documents[i].Commands)
+			if err != nil {
+				return
+			}
+		}
 	}
 	c.JSON(http.StatusOK, documents)
 }
