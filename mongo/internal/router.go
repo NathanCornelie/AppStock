@@ -2,6 +2,7 @@ package internal
 
 import (
 	"Mongo/internal/handler"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -39,6 +40,7 @@ func AddDocumentsRoutes(r *gin.Engine) {
 
 func DefineRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(cors.Default())
 	AddProductRoutes(r)
 	AddClientsRoutes(r)
 	AddCommandsRoutes(r)

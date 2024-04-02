@@ -4,7 +4,7 @@
         <div class="d-flex justify-space-between w-100">
           <div class="d-flex align-center">
             <v-app-bar-nav-icon>
-              <router-link to="Home"><img src="/vite.svg" class="logo" alt="Vite logo" /></router-link>
+              <router-link to="/"><img src="/vite.svg" class="logo" alt="Vite logo" /></router-link>
             </v-app-bar-nav-icon>
             <h2> Application</h2>
           </div>
@@ -16,8 +16,8 @@
           <button class="border-b bg-blue-accent-3 mr-3 ">
             Products
           </button>
-          <button class="border-b bg-purple-accent-4 ">
-            New Documents
+          <button class="border-b bg-purple-accent-4 " value="New Document">
+            New Document
           </button>
         </div>
       </template>

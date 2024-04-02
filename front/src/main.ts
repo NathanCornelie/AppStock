@@ -7,7 +7,6 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import {createRouter, createWebHistory, Router} from "vue-router";
 import Home from "./components/Home/Home.vue";
-
 const vuetify = createVuetify({
     components,
     directives,
