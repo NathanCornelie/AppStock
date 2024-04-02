@@ -2,6 +2,6 @@ type Command = {
     id : string
     documentId: string
     itemId:string
-    quantity:string
+    quantity:number
     discount:number
 }
