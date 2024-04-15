@@ -69,6 +69,32 @@ func GetDocumentByUserId(c *gin.Context) {
 	c.JSON(http.StatusOK, documents)
 }
 
+func GetDocumentByClientId(c *gin.Context) {
+	clientId := c.Param("clientId")
+	_id, err := primitive.ObjectIDFromHex(clientId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid client id provided"})
+		return
+	}
+	result, err := database.Documents.Find(c, bson.M{"clientId": _id}, options.Find().SetProjection(bson.M{"_id": 1, "clientId": 1}))
+	var documents []model.DocumentWithCommands
+	err = result.All(c, &documents)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to find document for this client"})
+		return
+	}
+	for i := 0; i < len(documents); i++ {
+		result, err = database.Commands.Find(c, bson.M{"documentId": documents[i].ID})
+		if err == nil {
+			err := result.All(c, &documents[i].Commands)
+			if err != nil {
+				return
+			}
+		}
+	}
+	c.JSON(http.StatusOK, documents)
+}
+
 func CreateDocument(c *gin.Context) {
 	var body model.CreateDocumentsRequest
 	err := c.ShouldBindJSON(&body)

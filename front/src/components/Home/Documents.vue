@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 
-import { onMounted, reactive, Ref, ref, UnwrapRef} from "vue";
+import { onMounted, Ref, ref, UnwrapRef} from "vue";
 import DocumentsAPI from "../../common/API/DocumentsAPI.ts";
 import DocumentModel from "@models/Document.ts";
 import Document from "@models/Document.ts";

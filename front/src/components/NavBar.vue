@@ -13,10 +13,11 @@
       </template>
       <template v-slot:append>
         <div>
-          <button class="border-b bg-blue-accent-3 mr-3 ">
+          <button class="border-b bg-blue-accent-3 mr-3 " >
             Products
           </button>
-          <button class="border-b bg-purple-accent-4 " value="New Document">
+          <button class="border-b bg-purple-accent-4 " @click="showClientModale()">
+
             New Document
           </button>
         </div>
@@ -25,6 +26,13 @@
 </template>
 
 <script setup lang="ts">
+
+import {ClientStore} from "../stores/clientStore.ts";
+
+const clientStore = ClientStore()
+const showClientModale = function (){
+  clientStore.setIsClientModale(true)
+}
 
 </script>
 

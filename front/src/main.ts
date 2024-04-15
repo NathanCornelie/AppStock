@@ -1,12 +1,16 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import './style.css'
 import App from './App.vue'
 import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import {createVuetify} from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import {createRouter, createWebHistory, Router} from "vue-router";
 import Home from "./components/Home/Home.vue";
+import {createPinia} from "pinia";
+
+const pinia = createPinia()
+
 const vuetify = createVuetify({
     components,
     directives,
@@ -15,10 +19,17 @@ const vuetify = createVuetify({
 const routes = [
     {
         path: '/',
-        component : Home
+        component: Home
     }
 ]
-const router : Router = createRouter({
-    history:createWebHistory(),routes})
+const router: Router = createRouter({
+    history: createWebHistory(), routes
+})
 
-createApp(App).use(vuetify).use(router).mount('#app')
+const app = createApp(App)
+
+app.use(vuetify)
+app.use(pinia)
+app.use(router)
+
+app.mount('#app')

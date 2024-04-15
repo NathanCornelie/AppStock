@@ -16,6 +16,7 @@ func main() {
 	}
 	err := database.Init(MongoUri, "developement")
 	if err != nil {
+		fmt.Println("Erreur d'initiaisation de la DB : \n  \t- Vérifier la connexion internet \n \t- Vérifier les creds\n \t- l'IP n'est ptre pas dans la whitelist")
 		fmt.Println(err)
 		return
 	}
