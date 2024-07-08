@@ -12,14 +12,15 @@ import {
 import {onMounted, ref, watch} from "vue";
 import { DocumentStore } from "../../stores/documentStore";
 import {Product} from "../../common/models/Product.ts";
-import ListClientsGridCells from "../../components/Clients/ListClientsGridCells.vue";
+import ListProductsTopRow from "./ListProductsGridTopRow.vue";
+import ListProductsGridCells from "./ListProductsGridCells.vue";
 
 const documentStore = DocumentStore()
 const onRowClicked = ()=>{}
 const cols = ref<ColDef[]>([{field:"id",cellRendererSelector: (params:ICellRendererParams)=>customCell(params,"id")},
   {field:"product",cellRendererSelector: (params:ICellRendererParams)=>customCell(params,"product")},
   {field:"description"},
-  {field:"quantity"},
+  {field:"quantity",cellRendererSelector: (params:ICellRendererParams)=>customCell(params,"quantity")},
   {field:"price"}]);
 const modules = [ClientSideRowModelModule]
 const gridApi = ref<GridApi|null>(null)
@@ -31,12 +32,13 @@ const gridOptions = ref({
 const customCell = (params: ICellRendererParams,field:string):CellRendererSelectorResult|undefined=>{
   if(params.node.rowPinned)
     return {
-      component: ListClientsGridCells,
+      component: ListProductsTopRow,
       params:{
-        field: field
+        field: field,
+        product: params.node.data
       }
     }
-  else return undefined
+  else return {component: ListProductsGridCells,params:{field:field,product: params.node.data}}
 
 }
 
@@ -57,10 +59,6 @@ const onGridReady = (params: GridReadyEvent)=>{
     gridApi.value.setGridOption('getRowHeight',getRowHeight)
     gridApi.value.sizeColumnsToFit()
     gridApi.value.setGridOption('pinnedTopRowData',[pinnedTopRow.value])
-
-
-
-
     window.addEventListener("resize",handleWindowResize)
     updateData()
   }catch (e){

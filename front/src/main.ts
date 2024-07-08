@@ -9,7 +9,8 @@ import {createRouter, createWebHistory, Router} from "vue-router";
 import Home from "./components/Home/Home.vue";
 import {createPinia} from "pinia";
 import Documents from "./components/Documents/Documents.vue";
-
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@mdi/font/css/materialdesignicons.css'
 const pinia = createPinia()
 
 const vuetify = createVuetify({
