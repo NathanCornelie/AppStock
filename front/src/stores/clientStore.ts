@@ -1,21 +1,22 @@
 import {defineStore} from 'pinia';
 
 export const ClientStore = defineStore('clientStore', {
-    state: () => ({
+    state: (): { isClientModale: boolean, selectedClientId: string | null } => ({
         isClientModale: false,
-        name: "nathan"
+        selectedClientId: null
     }),
+
     getters: {
-        inClientModale: (state) => state.isClientModale,
-        getName: state => state.name
+        getIsClientModale: (state) => state.isClientModale,
+        getSelectedClient: (state) => state.selectedClientId,
     },
+
     actions: {
         setIsClientModale(value: boolean) {
             this.isClientModale = value;
         },
-        changeName(name: string) {
-            this.name = name;
+        setSelectedClient(value: string) {
+            this.selectedClientId = value;
         }
-
     }
 });

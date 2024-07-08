@@ -1,8 +1,6 @@
-
 <script setup lang="ts">
-
 import Stats from "./Stats.vue";
-import Documents from "./Documents.vue";
+import Documents from "./ListDocuments.vue";
 import Client from "../Clients/Client.vue";
 
 </script>
@@ -18,4 +16,6 @@ import Client from "../Clients/Client.vue";
 
 </template>
 
-<style></style>
+<style>
+
+</style>

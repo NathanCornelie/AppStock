@@ -2,62 +2,70 @@
 import "ag-grid-community/styles/ag-theme-alpine.css"
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-quartz.css"
-import {ClientSideRowModelModule, GridReadyEvent} from "ag-grid-community";
+import {ClientSideRowModelModule, GridReadyEvent, RowClickedEvent} from "ag-grid-community";
 import {AgGridVue} from "@ag-grid-community/vue3";
 import {onMounted, ref, Ref, UnwrapRef} from "vue";
 import {Client} from "../../common/models/Client.ts";
 import ClientsAPI from "../../common/API/ClientsAPI.ts";
 import {ClientStore} from "../../stores/clientStore.ts";
+import {useRouter} from "vue-router";
 
 const clientStore = ClientStore();
 const gridOptions = ref({
-  enableCellTextSelection:true
+  enableCellTextSelection: true
 })
+const router = useRouter()
 
 const cols = [
-  {field: "id",width: 230},
+  {field: "id", width: 230},
   {field: "lastname"},
   {field: "name"},
-  {field: "email",flex:1},
+  {field: "email", flex: 1},
 
 ];
-let clients : Ref<UnwrapRef<Client[]>> = ref([])
+let clients: Ref<UnwrapRef<Client[]>> = ref([])
 const modules = [ClientSideRowModelModule]
 
-onMounted(async ()=>{
-  try{
+onMounted(async () => {
+  try {
     clients.value = await ClientsAPI.GetClients()
 
-  }catch (e) {
+  } catch (e) {
     console.log(e)
   }
 })
 
-const onGridReady = async (params:GridReadyEvent) => {
-  const updateData =  (data:Client[]) => {
+const onGridReady = async (params: GridReadyEvent) => {
+  const updateData = (data: Client[]) => {
     params.api.setGridOption('rowData', data)
   };
-  try{
+  try {
     clients.value = await ClientsAPI.GetClients()
     updateData(clients.value);
-  }catch (e) {
+  } catch (e) {
     console.log(e)
   }
-
+}
+const onRowClicked = (event: RowClickedEvent<any>) => {
+  if (event.data) {
+    clientStore.setSelectedClient(event.data.id)
+    router.push("/documents")
+  }
 }
 
 </script>
 
 <template>
-    <ag-grid-vue
-        :grid-options = "gridOptions"
-        style="height: 500px"
-        class="ag-theme-quartz"
-        @grid-ready="onGridReady"
-        :columnDefs="cols"
-        :modules="modules"
-    >
-    </ag-grid-vue>
+  <ag-grid-vue
+      :grid-options="gridOptions"
+      style="height: 500px"
+      class="ag-theme-quartz"
+      :onRowClicked="onRowClicked"
+      @grid-ready="onGridReady"
+      :columnDefs="cols"
+      :modules="modules"
+  >
+  </ag-grid-vue>
   <v-card-actions class="justify-end">
     <v-btn color="error" @click="clientStore.setIsClientModale(false)">Close</v-btn>
   </v-card-actions>

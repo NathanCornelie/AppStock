@@ -8,6 +8,7 @@ import * as directives from 'vuetify/directives'
 import {createRouter, createWebHistory, Router} from "vue-router";
 import Home from "./components/Home/Home.vue";
 import {createPinia} from "pinia";
+import Documents from "./components/Documents/Documents.vue";
 
 const pinia = createPinia()
 
@@ -20,6 +21,10 @@ const routes = [
     {
         path: '/',
         component: Home
+    },
+    {
+        path: '/documents',
+        component: Documents
     }
 ]
 const router: Router = createRouter({

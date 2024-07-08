@@ -1,11 +1,11 @@
 
 export class CreateClient {
-    firstname:string=""
+    name:string=""
     lastname:string=""
     email:string=""
     phoneNumber:string=""
-    constructor(firstname:string, lastname:string, email:string, phoneNumber:string) {
-        this.firstname = firstname;
+    constructor(name:string, lastname:string, email:string, phoneNumber:string) {
+        this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.phoneNumber = phoneNumber;

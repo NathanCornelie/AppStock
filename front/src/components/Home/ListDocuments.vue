@@ -23,6 +23,7 @@ function getNumberofProducts(doc : Document){
 }
 </script>
 
+
 <template>
   <v-card :title class="">
     <v-container class="bg-grey-lighten-4 doc_container" >

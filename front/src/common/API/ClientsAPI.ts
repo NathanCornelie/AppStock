@@ -14,6 +14,19 @@ export default abstract class{
             return json ? json as Client[] : []
         }
     }
+
+    static async GetClientById(id:string) : Promise<Client| null>{
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/clients/${id}` , {
+            method : "GET"
+        })
+
+        const json = await res.json()
+        if(json.error){
+            throw new Error(json.error.message)
+        }else{
+            return json ? json as Client : null
+        }
+    }
     static async CreateClient(client : CreateClient) : Promise<Client|null>{
         const res = await fetch(`${import.meta.env.VITE_API_URL}/clients`, {
             method : "POST",
