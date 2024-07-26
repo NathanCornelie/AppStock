@@ -2,9 +2,14 @@ services:
   mysql:
     image: 'mysql:latest'
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_DATABASE=appstock'
+      - 'MYSQL_PASSWORD=${MY_SQL_PASSWD}'
       - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - 'MYSQL_USER=${MY_SQL_USERNAME}'
     ports:
-      - '3306'
+      - 3307:3306
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
