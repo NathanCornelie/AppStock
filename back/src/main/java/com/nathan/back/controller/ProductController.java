@@ -3,6 +3,9 @@ package com.nathan.back.controller;
 import com.nathan.back.entity.Product;
 import com.nathan.back.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,37 +15,31 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @PostMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product){
-        return service.saveProduct(product);
-    }
-    @PostMapping("/addProducts")
-    public List<Product> addProducts(@RequestBody List<Product> products){
-        return service.saveProducts(products);
-    }
-
-    @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    @QueryMapping(name = "products")
+    public List<Product> products(){
         return service.getProducts();
     }
-    @GetMapping("/product/{id}")
-    public Product getProductById(@PathVariable int id){
+
+    @QueryMapping
+    public Product productById(@Argument Integer id){
         return service.getProductById(id);
     }
 
-    @GetMapping("/product/{name}")
-    public Product getProductByName(@PathVariable String name){
-        return service.getProductByName(name);
+    @MutationMapping
+    public Product createProduct(@Argument Product product){
+        return service.saveProduct(product);
     }
 
-    @PutMapping("/update")
-    public Product updateProduct(@RequestBody Product product){
+    @MutationMapping
+    public Integer deleteProduct(@Argument Integer id){
+        return service.deleteProduct(id);
+    }
+    @MutationMapping
+    public Product updateProduct(@Argument Product product){
         return service.updateProduct(product);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable int id){
-        return service.deleteProduct(id);
-    }
+
+
 
 }

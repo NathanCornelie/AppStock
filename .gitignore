@@ -131,7 +131,6 @@ dist
 
 #test http
 test.http
-.gitignore
 ## IDE
 .idea
 
