@@ -39,7 +39,4 @@ public class ProductController {
         return service.updateProduct(product);
     }
 
-
-
-
 }

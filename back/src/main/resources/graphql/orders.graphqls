@@ -1,0 +1,33 @@
+type Order {
+    id: ID
+    documentId: ID
+    itemId: ID
+    quantity: Int
+    discount: Int
+}
+
+input OrderInput{
+    documentId: ID
+    itemId: ID
+    quantity: Int
+    discount: Int
+}
+
+input OrderUpdate{
+    id:ID!
+    documentId: ID
+    itemId: ID
+    quantity: Int
+    discount: Int
+}
+
+extend type Query{
+    orders: [Order]
+    ordersById(id:ID): Order
+}
+
+extend type Mutation{
+    createOrder(order: OrderInput): Order
+    deleteOrder(id: ID): ID
+    updateOrder(order: OrderUpdate): Order
+}
