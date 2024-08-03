@@ -1,0 +1,32 @@
+type Document{
+    id: ID
+    type: String
+    orders: [Order]
+    clientId: ID
+    date: String
+}
+
+input DocumentInput{
+    type: String
+    clientId: ID
+    date: String
+}
+
+input  DocumentUpdate{
+    id: ID!
+    type: String
+    clientId: ID
+    date: String
+}
+
+extend type Query {
+    documents: [Document]
+    documentById(id:ID): Document
+}
+
+extend type Mutation {
+    createDocument(document: DocumentInput): Document
+    updateDocument(document: DocumentUpdate): Document
+    deleteDocument(id: ID): ID
+
+}
