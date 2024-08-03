@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UsersService service;
 
-    @QueryMapping(name = "users")
+    @QueryMapping
     public List<User> users(){
         return service.getUsers();
     }
@@ -35,9 +35,9 @@ public class UserController {
     public Integer deleteUser(@Argument Integer id){
         return service.deleteUser(id);
     }
-//    @MutationMapping
-//    public User updateUser(@Argument User user){
-//        return service.updateUser(user);
-//    }
+    @MutationMapping
+    public User updateUser(@Argument User user){
+        return service.updateUser(user);
+    }
 
 }

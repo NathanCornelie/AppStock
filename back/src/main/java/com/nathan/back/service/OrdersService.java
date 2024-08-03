@@ -30,6 +30,9 @@ public class OrdersService {
         existingOrder.setQuantity(order.getQuantity());
         existingOrder.setDocumentId(order.getDocumentId());
         existingOrder.setItemId(order.getItemId());
-        //TODO: a tester !! si on ne specifie pas tous les champs !!
         return repository.save(existingOrder);}
+
+    public List<Order> getOrdersByDocumentId(@Argument Integer documentId){
+        return repository.findAll().stream().filter(order -> order.getDocumentId() == documentId).toList();
+    }
 }

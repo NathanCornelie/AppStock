@@ -24,9 +24,9 @@ public class ClientsService {
         Client existingClient = repository.findById(client.getId()).orElse(null);
 
         assert existingClient != null;
-        existingClient.setFirstname(client.getFirstname());
-        existingClient.setLastname(client.getLastname());
-        existingClient.setEmail(client.getEmail());
+        if(client.getFirstname()!=null)existingClient.setFirstname(client.getFirstname());
+        if(client.getLastname()!=null)existingClient.setLastname(client.getLastname());
+        if(client.getEmail()!=null)existingClient.setEmail(client.getEmail());
 
         return repository.save(existingClient);
     }

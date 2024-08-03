@@ -22,7 +22,7 @@ public class OrderController {
     }
 
     @QueryMapping
-    public Order ordersById(@Argument Integer id){
+    public Order orderById(@Argument Integer id){
         return service.getOrderById(id);
     }
 

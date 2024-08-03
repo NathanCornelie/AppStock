@@ -30,5 +30,16 @@ public class UsersService{
         return id;
     }
 
-    //TODO : pour la methode update voir quelle synthaxe utiliser:   
+    public User updateUser(@Argument User user){
+        User existingUSer= repository.findById(user.getId()).orElse(null);
+
+        assert  existingUSer != null;
+        if(user.getEmail()!=null) existingUSer.setEmail(user.getEmail());
+        if(user.getPassword()!=null) existingUSer.setPassword(user.getPassword());
+        if(user.getFirstname()!=null) existingUSer.setFirstname(user.getFirstname());
+        if(user.getLastname()!=null) existingUSer.setLastname(user.getLastname());
+
+        return repository.save(user);
+    }
+
 }

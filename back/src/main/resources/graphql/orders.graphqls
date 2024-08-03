@@ -23,7 +23,7 @@ input OrderUpdate{
 
 extend type Query{
     orders: [Order]
-    ordersById(id:ID): Order
+    orderById(id:ID): Order
 }
 
 extend type Mutation{
