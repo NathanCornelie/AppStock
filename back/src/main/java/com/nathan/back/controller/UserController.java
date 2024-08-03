@@ -1,7 +1,8 @@
 package com.nathan.back.controller;
 
 import com.nathan.back.entity.User;
-import com.nathan.back.service.UserService;
+
+import com.nathan.back.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserService service;
+    private UsersService service;
 
     @QueryMapping(name = "users")
     public List<User> users(){
@@ -27,16 +28,16 @@ public class UserController {
 
     @MutationMapping
     public User createUser(@Argument User user){
-        return service.saveUser(user);
+        return service.createUser(user);
     }
 
     @MutationMapping
     public Integer deleteUser(@Argument Integer id){
         return service.deleteUser(id);
     }
-    @MutationMapping
-    public User updateUser(@Argument User user){
-        return service.updateUser(user);
-    }
+//    @MutationMapping
+//    public User updateUser(@Argument User user){
+//        return service.updateUser(user);
+//    }
 
 }

@@ -17,6 +17,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name= "Users")
 public class User{
+
+    @Id
+    @GeneratedValue
     private Integer id;
     private String email;
     private String firstname;

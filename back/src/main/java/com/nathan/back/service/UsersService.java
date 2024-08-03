@@ -1,11 +1,12 @@
 package com.nathan.back.service;
 
 
-import com.nathan.back.entity.Service;
-import com.nathan.back.model.ProductCreate;
-import com.nathan.back.repository.ProductRepository;
 
+
+import com.nathan.back.entity.User;
+import com.nathan.back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class UsersService{
     public List<User> getUsers(){
         return repository.findAll();
     }
-    public User getUserById(Intger id){
+    public User getUserById(Integer id){
         return repository.findById(id).orElse(null);    
     }
 
@@ -28,5 +29,6 @@ public class UsersService{
         repository.deleteById(id);
         return id;
     }
+
     //TODO : pour la methode update voir quelle synthaxe utiliser:   
 }
