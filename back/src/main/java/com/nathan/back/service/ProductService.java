@@ -1,7 +1,7 @@
 package com.nathan.back.service;
 
 import com.nathan.back.entity.Product;
-import com.nathan.back.model.ProductCreate;
+
 import com.nathan.back.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,9 @@ public class ProductService {
     public List<Product> saveProducts(List<Product> products) {
         return repository.saveAll(products);
     }
-
     public List<Product> getProducts(){
         return repository.findAll();
     }
-
     public Product getProductById(Integer id){
         return repository.findById(id).orElse(null);
     }

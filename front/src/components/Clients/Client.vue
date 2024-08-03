@@ -4,7 +4,7 @@ import ListClients from "../Clients/ListClients.vue";
 import {Ref, ref} from "vue";
 import CreateClient from "../Clients/CreateClient.vue";
 
-const clientStore = ClientStore();
+const clientStore = ClientStore(); 
 const isCreate: Ref<boolean> = ref(false)
 const snackbar = ref(false)
 const snackbarText = ref("")
