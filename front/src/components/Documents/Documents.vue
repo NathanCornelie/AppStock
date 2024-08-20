@@ -39,8 +39,11 @@ const getProducts = async ()=>{
 }
 const handleProductClick = (item: Product)=>{
   let products = documentStore.selectedProducts
-  products.push(item)
-  documentStore.setSelectedProducts(products)
+  const product = products.find(p=>p.id === item.id)
+  if(!product) {
+    products.push(item)
+    documentStore.setSelectedProducts(products)
+  }
 }
 
 </script>

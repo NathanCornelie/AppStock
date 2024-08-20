@@ -47,6 +47,7 @@ onMounted(()=>{
 })
 
 watch(documentStore.selectedProducts, ()=>{
+
    gridApi?.value?.setGridOption('rowData',documentStore.selectedProducts)
 })
 

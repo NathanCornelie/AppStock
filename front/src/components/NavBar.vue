@@ -17,7 +17,6 @@
             Products
           </button>
           <button class="border-b bg-purple-accent-4 " @click="showClientModale()">
-
             New Document
           </button>
         </div>

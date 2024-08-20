@@ -40,8 +40,12 @@ const filterOnProductFunction = (value: string, query: string, item?: { value: s
 }
 const handleSelectedProduct = (item:Product)=>{
   let old = documentStore.selectedProducts
-  old.push(item)
-  documentStore.setSelectedProducts(old)
+  const product = old.find(p=>p.id ===item.id)
+  if(product){
+    old.push(item)
+    documentStore.setSelectedProducts(old)
+  }
+
 }
 
 watch(selectedProduct,()=>{

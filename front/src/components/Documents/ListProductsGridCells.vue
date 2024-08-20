@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import {ICellRendererParams} from "ag-grid-community";
-import {onMounted, PropType, ref} from "vue";
+import {onMounted, PropType, ref, watch} from "vue";
 import {Product} from "../../common/models/Product.ts";
 import { VNumberInput } from 'vuetify/labs/VNumberInput'
+import {DocumentStore} from "../../stores/documentStore.ts";
 
 interface ListClientsGridCellsParams extends ICellRendererParams{field:String,product:Product}
 const params = defineProps({params: Object as PropType<ListClientsGridCellsParams>})
 const field = params.params?.field
 const product = params.params?.product
-const quantity= ref<number>(0)
-onMounted(()=>{
+const quantity= ref<number>(product.quantity ?? 0)
+const documentStore = DocumentStore()
+
+
+watch(quantity,()=>{
+
+
   console.log(product)
+  documentStore.updateProductQuantity(product.id,quantity.value)
 })
 </script>
 <template>
