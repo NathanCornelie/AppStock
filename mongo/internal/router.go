@@ -2,8 +2,11 @@ package internal
 
 import (
 	"Mongo/internal/handler"
+	"Mongo/internal/logger"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"io"
+	"os"
 )
 
 func AddProductRoutes(r *gin.Engine) {
@@ -40,8 +43,14 @@ func AddDocumentsRoutes(r *gin.Engine) {
 }
 
 func DefineRouter() *gin.Engine {
-	r := gin.Default()
+	r := gin.New()
+	// logs
+	f, _ := os.Create("logs.log")
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	r.Use(gin.LoggerWithFormatter(logger.FormatLogs))
+	//cors policies
 	r.Use(cors.Default())
+
 	AddProductRoutes(r)
 	AddClientsRoutes(r)
 	AddCommandsRoutes(r)
